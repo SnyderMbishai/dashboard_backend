@@ -46,4 +46,11 @@ class TopFiveCountriesLeastPendingUnits(generics.ListAPIView):
 
 class TotalProducedUnitsByDate(generics.ListAPIView):
     serializer_class = CountrySerializer
-    queryset = Country.filter_by_date(request.data) #["2020-03-01T00:00:00.000000Z", "2020-03-01T00:00:00.000000Z"]
+    # queryset = Country.filter_by_date(date_range) #["2020-03-01T00:00:00.000000Z", "2020-03-01T00:00:00.000000Z"]
+
+    def  get_queryset(self):
+        # import pdb; pdb.set_trace()
+        date_range = [self.request.data["start"], self.request.data["end"]]
+        queryset = Country.filter_by_date(date_range)
+        return queryset
+    
