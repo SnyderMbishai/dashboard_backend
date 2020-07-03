@@ -1,4 +1,4 @@
-import datetime
+from datetime import datetime
 
 from rest_framework import serializers
 from .models import Country, Produced, Pending, Rejected
@@ -42,6 +42,9 @@ class RawDataSerializer(serializers.Serializer):
     rejected = serializers.IntegerField(required=True)
     pending = serializers.IntegerField(required=True)
 
+    # def format_date(self, date):
+    #     return date.strftime('%d %b %Y %H:%M:%S')
+
     def validate_produced(self, value):
         try:
             return int(value)
@@ -50,7 +53,7 @@ class RawDataSerializer(serializers.Serializer):
 
     def create(self, validated_data):
         date = convert_date(validated_data["date"])
-        validated_data["date"]= date         
+        validated_data["date"]=date
         country = Country.objects.get_or_create(name=validated_data['country'])
         produced = Produced.objects.create(country=country[0],units=validated_data["produced"], date=validated_data["date"] )
         rejected = Rejected.objects.create(country=country[0],units=validated_data["rejected"], date=validated_data["date"])

@@ -78,7 +78,7 @@ WSGI_APPLICATION = 'simpledashboard.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'PBP',
+        'NAME': 'PBP2',
         'USER': 'postgres',
         'PASSWORD': 'Flowers10',
         'HOST': 'localhost',
@@ -109,13 +109,13 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
 
-LANGUAGE_CODE = 'en-GB'
+LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'UTC'
 
 USE_I18N = True
 
-USE_L10N = True
+USE_L10N = False
 
 USE_TZ = True
 
@@ -133,4 +133,7 @@ REST_FRAMEWORK = {
     ]
 }
 
-DATE_INPUT_FORMATS = ("%d/%m/%YT%H:%M:%S.%fZ",'%d-%m-%Y','%Y-%m-%d')
+# DATE_FORMAT = "%d/%m/%Y"
+DATE_INPUT_FORMATS = ["%d/%m/%Y"]
+DATETIME_INPUT_FORMATS = ["%d/%m/%YT%H:%M:%S.%fZ"]
+# DATETIME_FORMAT = "%d/%m/%YT%H:%M:%S.%fZ"

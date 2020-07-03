@@ -44,6 +44,6 @@ class TopFiveCountriesLeastPendingUnits(generics.ListAPIView):
     serializer_class = CountrySerializer
     queryset = Country.top_five_least_pending_contries()
 
-# class TotalProducedUnitsByDate(generics.ListAPIView):
-#     serializer_class = CountrySerializer
-#     queryset = Country.filter_by_date(["10/03/2020T00:00:00.000000Z", "10/03/2020T00:00:00.000000Z"])
+class TotalProducedUnitsByDate(generics.ListAPIView):
+    serializer_class = CountrySerializer
+    queryset = Country.filter_by_date(request.data) #["2020-03-01T00:00:00.000000Z", "2020-03-01T00:00:00.000000Z"]
