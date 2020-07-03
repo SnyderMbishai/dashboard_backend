@@ -32,37 +32,18 @@ def save_data(request):
         return JsonResponse({"message":"Invalid Data"}, status=400)
 
 class TopTenCountriesProducers(generics.ListAPIView):
-    """ Return top ten producers """
-    serializer_class = ProducerSerializer
-    queryset = Produced.top_ten_produced_countries()
+    serializer_class = CountrySerializer
+    queryset = Country.top_ten_produced_countries()
 
-    def get(self, request):
-        serializer = ProducerSerializer(data=list(self.get_queryset()),many=True, context={"request":request})
-        serializer.is_valid()
-        return JsonResponse({"results":serializer.data})
-    
 
 class TopFiveCountriesRejected(generics.ListAPIView):
-    pass
+    serializer_class = CountrySerializer
+    queryset = Country.top_five_rejected_countries()
 
 class TopFiveCountriesLeastPendingUnits(generics.ListAPIView):
-    pass
+    serializer_class = CountrySerializer
+    queryset = Country.top_five_least_pending_contries()
 
-class TotalProducedUnitsByDate(generics.ListAPIView):
-    pass
-    
-
-# def get_top_ten_countries_produced(request):
-#     # countries = Country.objects.all()
-#     top_ten_countries = Produced.objects.values("country","units").annotate(total_units=Sum("units")).order_by("total_units")[:10]
-#     import pdb; pdb.set_trace()
-#     # serializer = ProducerSerializer(top_ten_countries, many=True)
-#     return JsonResponse({"countries": json.dumps(top_ten_countries)})
-
-
-# generic view
-
-# top 10 countries with the highest produced units
-# top five days that had the most rejected units
-# op 5 countries with the least pending units
-# total units produced each day this endpoint should be able to filter according to a date range
+# class TotalProducedUnitsByDate(generics.ListAPIView):
+#     serializer_class = CountrySerializer
+#     queryset = Country.filter_by_date(["10/03/2020T00:00:00.000000Z", "10/03/2020T00:00:00.000000Z"])

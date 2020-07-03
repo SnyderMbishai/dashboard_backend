@@ -4,10 +4,6 @@ from rest_framework import serializers
 from .models import Country, Produced, Pending, Rejected
 from .helpers import convert_date
 
-class CountrySerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Country
-        fields = ("__all__")
 
 class ProducerSerializer(serializers.ModelSerializer):
     class Meta:
@@ -22,6 +18,12 @@ class ProducerSerializer(serializers.ModelSerializer):
             fields['date'].required = False
         return fields
 
+class CountrySerializer(serializers.ModelSerializer):
+    producer = ProducerSerializer(many=True,read_only=True )
+    unit_sum = serializers.IntegerField(read_only=True)
+    class Meta:
+        model = Country
+        fields = ["name", "producer", "unit_sum"]
 
 class RejectedSerializer(serializers.ModelSerializer):
     class Meta:
