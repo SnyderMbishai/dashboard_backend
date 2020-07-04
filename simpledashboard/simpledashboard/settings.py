@@ -25,8 +25,12 @@ SECRET_KEY = 'o=tnkm5uahlo8=47)28y9u23x2$n4ihlt19@k4cmj#5arxcn_+'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['0.0.0.0','localhost','127.0.0.1',]
 
+CORS_ORIGIN_ALLOW_ALL = True 
+CORS_ORIGIN_WHITELIST = (
+    'localhost:3000',
+)
 
 # Application definition
 
@@ -49,6 +53,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = 'simpledashboard.urls'
@@ -70,6 +75,8 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'simpledashboard.wsgi.application'
+
+
 
 
 # Database
