@@ -140,7 +140,9 @@ REST_FRAMEWORK = {
     ]
 }
 
-# DATE_FORMAT = "%d/%m/%Y"
 DATE_INPUT_FORMATS = ["%d/%m/%Y"]
 DATETIME_INPUT_FORMATS = ["%d/%m/%YT%H:%M:%S.%fZ"]
-# DATETIME_FORMAT = "%d/%m/%YT%H:%M:%S.%fZ"
+
+# Configure Django App for Heroku.
+import django_heroku
+django_heroku.settings(locals())

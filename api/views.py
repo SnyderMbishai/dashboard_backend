@@ -49,8 +49,9 @@ class TotalProducedUnitsByDate(generics.ListAPIView):
     # queryset = Country.filter_by_date(date_range) #["2020-03-01T00:00:00.000000Z", "2020-03-01T00:00:00.000000Z"]
 
     def  get_queryset(self):
-        # import pdb; pdb.set_trace()
+
         date_range = [self.request.GET.get("start"), self.request.GET.get("end")]
+        # import pdb; pdb.set_trace()
         queryset = Country.filter_by_date(date_range)
         return queryset
     
