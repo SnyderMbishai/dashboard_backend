@@ -2,6 +2,7 @@ import datetime
 from dateutil.parser import parse
 
 def clean_data(data):
+    """ Return object with the latest date """
     countries = []
     cleaned_data =[]
     for obj in data:
@@ -17,6 +18,5 @@ def clean_data(data):
 
 def convert_date(data):
     """ Convert date to dd/mm/yy """
-    # nw_data = parse(data)
-    converted_date = datetime.datetime.strptime(data, "%Y-%m-%dT%H:%M:%S.%fZ") #.strftime("%d/%m/%YT%H:%M:%S.%fZ")
+    converted_date = datetime.datetime.strptime(data, "%Y-%m-%dT%H:%M:%S.%fZ")
     return converted_date

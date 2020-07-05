@@ -13,7 +13,6 @@ from .models import Country, Produced, Pending, Rejected
 from .serializers import CountrySerializer, RawDataSerializer, ProducerSerializer
 from .helpers import clean_data
 
-# Create your views here.
 def hello(request):
     return JsonResponse({"message": "Helloworld"})
 
@@ -21,7 +20,7 @@ def hello(request):
 @permission_classes((permissions.AllowAny,))
 def save_data(request):
     """ List data or save data"""
-    # alter provided date to dd/mm/yy
+    # alter provided date to dd/mm/yy > django rejected the requested format
     ## save data
     if request.method == 'POST':
         cleaned_data = clean_data(request.data)
@@ -46,12 +45,10 @@ class TopFiveCountriesLeastPendingUnits(generics.ListAPIView):
 
 class TotalProducedUnitsByDate(generics.ListAPIView):
     serializer_class = CountrySerializer
-    # queryset = Country.filter_by_date(date_range) #["2020-03-01T00:00:00.000000Z", "2020-03-01T00:00:00.000000Z"]
 
     def  get_queryset(self):
 
         date_range = [self.request.GET.get("start"), self.request.GET.get("end")]
-        # import pdb; pdb.set_trace()
         queryset = Country.filter_by_date(date_range)
         return queryset
     

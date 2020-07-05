@@ -42,9 +42,6 @@ class RawDataSerializer(serializers.Serializer):
     rejected = serializers.IntegerField(required=True)
     pending = serializers.IntegerField(required=True)
 
-    # def format_date(self, date):
-    #     return date.strftime('%d %b %Y %H:%M:%S')
-
     def validate_produced(self, value):
         try:
             return int(value)
