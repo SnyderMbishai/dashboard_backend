@@ -27,7 +27,7 @@ class Country(models.Model):
 
     @classmethod
     def filter_by_date(cls, date_range):
-        filtered = cls.objects.filter(producer__date__range=date_range).annotate(total_units=Sum('producer__units'))
+        filtered = cls.objects.filter(producer__date__range=date_range).annotate(unit_sum=Sum('producer__units')).values('name','unit_sum')
         return filtered
 
 class Produced(models.Model):
